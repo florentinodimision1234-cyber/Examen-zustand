@@ -1,16 +1,16 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-
-export const useFavoritas = create(persist(
+export const useCarrito = create(persist(
     set => ({
         carrito: [],
-        añadirCarrito: (idProducto) => set(state => ({
-            carrito: [...state.favoritas, idPeli]
+        añadirCarrito: (producto) => set(state => ({
+            carrito: [...state.carrito, producto]
         })),
-        eliminarCarrito: (idProducto) => set(state => ({
-            carrito: state.carrito.filter(f => f !== idPeli)
-        }))
+        eliminarCarrito: (id) => set(state => ({
+            carrito: state.carrito.filter(p => p.id !== id)
+        })),
+        limpiarCarrito: () => set({ carrito: [] })
     }),
     {
         name: "carrito-storage"
